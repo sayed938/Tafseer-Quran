@@ -1,0 +1,27 @@
+tafsir-katheer -  tafsir-tabary -  tafsir-saadi   -   tafsir-baghawy
+
+https://dev.surahapp.com/api/v1/aya/tafsir-katheer/1/2
+ tafsir-katheer -> slug
+ 1 ->  sura_number   
+ 2  -> aya_number 
+
+aya by aya this is first way
+
+
+-------------------another way 
+https://dev.surahapp.com/api/v1/aya/tafsir-katheer/2/1/200
+ tafsir-katheer -> slug
+ 1 ->  sura_number   
+ 2  -> from_aya_number 
+ 200  ->  to_aya_number 
+
+  ------------------ex model    
+
+{
+    "content": "(الم) هذه من الحروف التي افتُتِحت بها بعض سور القرآن، وهي حروفٌ هجائية لا معنى لها في نفسها إذا جاءت مفردة هكذا (أ، ب، ت، إلخ)، ولها حكمة ومغزى؛ حيث لا يوجد في القرآن ما لا حكمة له، ومن أهم حِكَمها: الإشارة إلى التحدي بالقرآن الذي يتكوَّن من الحروف نفسها التي يعرفونها ويتكلمون بها؛ لذا يأتي غالبًا بعدها ذكرٌ للقرآن الكريم، كما في هذه السورة.",
+    "sura_number": 2,
+    "sura_name": "البقرة",
+    "aya_number": 1,
+    "aya_text": "الٓمٓ"
+  },
+  {

@@ -46,8 +46,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.exampletafsyr.core.Utils
 import com.exampletafsyr.tafsyr.R
-import com.exampletafsyr.tafsyr.Utils
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
 import java.nio.file.WatchEvent

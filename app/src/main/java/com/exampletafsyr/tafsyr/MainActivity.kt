@@ -3,19 +3,7 @@ package com.exampletafsyr.tafsyr
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.exampletafsyr.tafsyr.screens.AyahListScreen
-import com.exampletafsyr.tafsyr.screens.HomeScreen
-import com.exampletafsyr.tafsyr.screens.SuraListScreen
-import com.exampletafsyr.tafsyr.screens.TafsyrScreen
-import com.exampletafsyr.tafsyr.ui.theme.TafsyrTheme
+import com.exampletafsyr.tafsyr.screens.sura.SuraListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

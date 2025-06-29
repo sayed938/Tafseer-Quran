@@ -1,4 +1,4 @@
-package com.exampletafsyr.tafsyr.screens
+package com.exampletafsyr.tafsyr.screens.tafsyr
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

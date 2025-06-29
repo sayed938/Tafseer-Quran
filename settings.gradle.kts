@@ -23,3 +23,4 @@ rootProject.name = "Tafsyr"
 include(":app")
 include(":data")
 include(":domain")
+include(":core")

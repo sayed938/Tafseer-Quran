@@ -17,3 +17,4 @@ val BackGColor2 = Color(0xFFFFF8E1)
 val TextColor=Color(0xFF212121)
 
 val AyaColor=Color(0xFFD2C29A)
+val CardMainColor3 = Color(0xFFBEBECE)

@@ -1,8 +1,10 @@
 package com.exampletafsyr.tafsyr.screens.aya
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,20 +40,30 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.exampletafsyr.core.Utils
+import com.exampletafsyr.tafsyr.PassArgsSharedViewM
 import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
+import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
 
 @SuppressLint("MutableCollectionMutableState")
 @Composable
-fun AyahListScreen() {
+fun AyahListScreen(
+    navController: NavController, sharedVM: PassArgsSharedViewM
+) {
+    Log.d("sayed-res-name",sharedVM.suraName.value.toString()+" "+sharedVM.tafsyrType.value)
     var input by remember { mutableStateOf("") }
     var hintText by remember { mutableStateOf("ادخل") }
     var aya by remember { mutableStateOf(Utils.aya) }
@@ -61,11 +74,8 @@ fun AyahListScreen() {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient
-                    (colors = listOf(CardMainColor1, CardMainColor2))
-            ), horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize().background(Color.White)
+            , horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
@@ -75,37 +85,39 @@ fun AyahListScreen() {
         ) {
             Icon(
                 painter = painterResource(R.drawable.baseline_arrow_forward_ios_24),
-                contentDescription = "next",
-                modifier = Modifier.size(height = 25.dp, width = 30.dp)
+                contentDescription = "next", tint = Color(0xFFC4A94B),
+                modifier = Modifier.size(height = 25.dp, width = 30.dp).clickable{
+                    navController.popBackStack()
+                }
             )
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text(
-                text = " سورة : ${"البقرة"}",
+                text = " سورة : ${Utils.surahNames[sharedVM.suraName.value!!-1]}",
                 fontWeight = FontWeight.Bold,
-                fontSize = 19.sp,
+                fontSize = 19.sp, color = Color(0xFFC4A94B),
                 fontFamily = FontFamily(Font(R.font.amiriquran))
             )
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text(
-                text = " رقم السورة : ${2}",
+                text = " رقم السورة : ${sharedVM.suraName.value!!}",
                 fontWeight = FontWeight.Bold,
-                fontSize = 19.sp,
+                fontSize = 19.sp,color = Color(0xFFC4A94B),
                 fontFamily = FontFamily(Font(R.font.amiriquran))
             )
         }
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        Row(modifier = Modifier.fillMaxWidth().padding(5.dp), horizontalArrangement = Arrangement.Center) {
             Text(
                 text = " ادخل رقم الاية التي تريد تفسيرها او اختر من القائمة",
                 fontWeight = FontWeight.Bold,
-                fontSize = 19.sp,
+                fontSize = 17.sp,color = Color(0xFFC4A94B), textAlign = TextAlign.Center,
                 fontFamily = FontFamily(Font(R.font.amiriquran))
             )
         }
 
         OutlinedTextField(
-            modifier = Modifier.width(65.dp), textStyle = TextStyle(textAlign = TextAlign.Center),
+            modifier = Modifier.size(65.dp), textStyle = TextStyle(textAlign = TextAlign.Center),
             value = input, maxLines = 1,
             onValueChange = {
                 input = it
@@ -114,23 +126,33 @@ fun AyahListScreen() {
             label = {
                 Text(
                     hintText,
-                    color = Color.Black,
+                    color = Color(0xFFC4A94B),
                     fontSize = 12.sp,
                     textAlign = TextAlign.Center
                 )
             },
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number
+            ),colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFFFFF8E1),
+                unfocusedContainerColor = Color(0xFFFFF8E1),
+                focusedIndicatorColor = Color(0xFFC4A94B),
+                unfocusedIndicatorColor = Color.Gray,
+                cursorColor = Color(0xFFC4A94B),
+                focusedLabelColor = Color(0xFFC4A94B),
+                unfocusedLabelColor = Color(0xFFC4A94B),
+                disabledLabelColor = Color.Gray,
+                focusedTextColor = Color.Black,
+                unfocusedTextColor = Color.Black
             )
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
         LazyVerticalGrid(columns = GridCells.Fixed(count = 1)) {
             if (input == "") {
                 hintText = "ادخل"
                 items(ayaNumbers.size) {
-                    AyahCustom(aya[it], ayaNumbers[it])
+                    AyahCustom(aya[it], ayaNumbers[it],sharedVM,navController)
                 }
             } else {
                 if (input.toInt() > 286) {
@@ -141,7 +163,7 @@ fun AyahListScreen() {
                             hintText = ""
                             ayaResult = aya[input.toInt() - 1]
                             numResult = input.toInt()
-                            AyahCustom(ayaResult, numResult)
+                            AyahCustom(ayaResult, numResult,sharedVM,navController)
                         } else
                             hintText = "خطأ"
                     }
@@ -152,12 +174,21 @@ fun AyahListScreen() {
 }
 
 @Composable
-fun AyahCustom(aya: String, ayaNum: Int) {
+fun AyahCustom(aya: String, ayaNum: Int,sharedViewM: PassArgsSharedViewM,navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp), border = BorderStroke(1.dp, CardMainColor1),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .height(60.dp)
+            .padding(top = 2.dp, bottom = 2.dp, start = 5.dp, end = 5.dp)
+            .clickable {
+                sharedViewM.saveTSuraNum(ayaNum)
+                navController.navigate("tafsyrScreen")
+            },
+        elevation = CardDefaults.cardElevation(4.dp),
+        border = _root_ide_package_.androidx.compose.foundation.BorderStroke(
+            2.dp, brush = Brush.linearGradient
+                (colors = listOf(CardMainColor1, CardMainColor3))
+        )
     ) {
         Row(
             modifier = Modifier
@@ -165,7 +196,7 @@ fun AyahCustom(aya: String, ayaNum: Int) {
                 .padding(2.dp)
                 .background(
                     brush = Brush.linearGradient
-                        (colors = listOf(CardMainColor1, CardMainColor2))
+                        (colors = listOf(CardMainColor1, CardMainColor3))
                 )
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -174,20 +205,20 @@ fun AyahCustom(aya: String, ayaNum: Int) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(36.dp)
+                    .size(30.dp)
                     .clip(CircleShape)
                     .background(Color(0xFFFCEBB3))
             ) {
                 Text(
                     text = "${ayaNum}",
                     color = Color.Black,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold, fontSize = 12.sp
                 )
             }
             Text(
-                text = "${aya}",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold, fontFamily = FontFamily(Font(R.font.amiriquran))
+                text = "${aya}", maxLines = 1,
+                fontSize = 16.sp, textAlign = TextAlign.Right,
+                fontWeight = FontWeight.Bold, color = Color(0xFFFCEBB3)
             )
         }
     }
@@ -196,5 +227,5 @@ fun AyahCustom(aya: String, ayaNum: Int) {
 @Preview
 @Composable
 fun AyahPreview() {
-    AyahListScreen()
+    //AyahListScreen()
 }

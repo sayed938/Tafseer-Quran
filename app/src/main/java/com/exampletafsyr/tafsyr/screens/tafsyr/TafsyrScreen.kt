@@ -1,6 +1,7 @@
 package com.exampletafsyr.tafsyr.screens.tafsyr
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.exampletafsyr.tafsyr.PassArgsSharedViewM
 import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.ui.theme.BackGColor1
 import com.exampletafsyr.tafsyr.ui.theme.BackGColor2
@@ -41,7 +44,10 @@ import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
 import com.exampletafsyr.tafsyr.ui.theme.TextColor
 
 @Composable
-fun TafsyrScreen() {
+fun TafsyrScreen(
+    navController: NavController,
+    sharedVM: PassArgsSharedViewM
+) {
     val pagerState = rememberPagerState(pageCount = {
         10
     })
@@ -166,6 +172,9 @@ fun TafsyrScreen() {
                 Spacer(modifier = Modifier.height(10.dp))
                 Box(
                     modifier = Modifier
+                        .clickable {
+                            navController.popBackStack()
+                        }
                         .size(width = 180.dp, height = 40.dp)
                         .background(
                             brush = Brush.linearGradient
@@ -194,5 +203,5 @@ fun TafsyrScreen() {
 @Preview
 @Composable
 fun TafsyrPreview() {
-    TafsyrScreen()
+    //TafsyrScreen()
 }

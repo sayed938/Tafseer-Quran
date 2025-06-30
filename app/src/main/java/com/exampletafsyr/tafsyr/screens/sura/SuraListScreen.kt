@@ -1,6 +1,8 @@
-package com.exampletafsyr.tafsyr.screens
+package com.exampletafsyr.tafsyr.screens.sura
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,19 +31,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.exampletafsyr.core.Utils
+import com.exampletafsyr.tafsyr.PassArgsSharedViewM
 import com.exampletafsyr.tafsyr.R
-import com.exampletafsyr.tafsyr.Utils
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
+import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
 
 @Composable
-fun SuraListScreen() {
+fun SuraListScreen(
+    navController: NavController,
+    sharedVM: PassArgsSharedViewM
+) {
+    Log.d("sayed-resu : ", sharedVM.tafsyrType.value.toString())
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                brush = Brush.linearGradient
-                    (colors = listOf(CardMainColor1, CardMainColor2))
+                Color.White
             ), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
@@ -52,7 +60,7 @@ fun SuraListScreen() {
             Text(
                 text = "اختر السورة",
                 fontFamily = FontFamily(Font(R.font.amiriquran)),
-                fontSize = 20.sp,
+                fontSize = 20.sp, color = Color.Black,
                 fontWeight = (FontWeight.ExtraBold), textAlign = TextAlign.Center
             )
         }
@@ -66,42 +74,55 @@ fun SuraListScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 items(Utils.surahNames.size) {
-                    SuraNames(Utils.surahNames[it], Utils.surahNumbers[it])
+                    SuraNames(Utils.surahNames[it], Utils.surahNumbers[it], navController, sharedVM)
                 }
 
             }
-           /* Box(
-                modifier = Modifier
-                    .size(width = 180.dp, height = 40.dp)
-                    .background(
-                        brush = Brush.linearGradient
-                            (colors = listOf(AyaColor, CardMainColor2)),
-                        shape = RoundedCornerShape(12.dp)
-                    ), contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    "رجوع",
-                    fontSize = 19.sp,
-                    fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
-                    color = Color.White
-                )
+            /* Box(
+                 modifier = Modifier
+                     .size(width = 180.dp, height = 40.dp)
+                     .background(
+                         brush = Brush.linearGradient
+                             (colors = listOf(AyaColor, CardMainColor2)),
+                         shape = RoundedCornerShape(12.dp)
+                     ), contentAlignment = Alignment.Center
+             ) {
+                 Text(
+                     "رجوع",
+                     fontSize = 19.sp,
+                     fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
+                     color = Color.White
+                 )
 
-            }*/
+             }*/
 
         }
     }
 
 
-
 }
 
 @Composable
-fun SuraNames(suraName: String, suraNum: Int) {
+fun SuraNames(
+    suraName: String,
+    suraNum: Int,
+    navController: NavController,
+    sharedViewM: PassArgsSharedViewM
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .height(60.dp)
+            .padding(2.dp)
+            .clickable {
+                sharedViewM.saveTSuraNum(suraNum)
+                navController.navigate("ayaListScreen")
+            },
+        elevation = CardDefaults.cardElevation(4.dp),
+        border = _root_ide_package_.androidx.compose.foundation.BorderStroke(
+            2.dp, brush = Brush.linearGradient
+                (colors = listOf(CardMainColor1, CardMainColor3))
+        )
     ) {
         Row(
             modifier = Modifier
@@ -109,7 +130,7 @@ fun SuraNames(suraName: String, suraNum: Int) {
                 .padding(2.dp)
                 .background(
                     brush = Brush.linearGradient
-                        (colors = listOf(CardMainColor1, CardMainColor2))
+                        (colors = listOf(CardMainColor1, CardMainColor3))
                 )
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -118,20 +139,20 @@ fun SuraNames(suraName: String, suraNum: Int) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(33.dp)
+                    .size(30.dp)
                     .clip(CircleShape)
                     .background(Color(0xFFFCEBB3))
             ) {
                 Text(
                     text = "${suraNum}",
                     color = Color.Black,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold, fontSize = 12.sp
                 )
             }
             Text(
                 text = "${suraName}",
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold, color = Color(0xFFFCEBB3)
             )
         }
     }
@@ -140,5 +161,5 @@ fun SuraNames(suraName: String, suraNum: Int) {
 @Preview
 @Composable
 fun SuraPreview() {
-    SuraListScreen()
+    //SuraListScreen()
 }

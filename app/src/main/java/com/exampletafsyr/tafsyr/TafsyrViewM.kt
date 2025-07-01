@@ -1,5 +1,6 @@
 package com.exampletafsyr.tafsyr
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exampletafsyr.domain.entities.AyaDataModel
@@ -22,14 +23,23 @@ class TafsyrViewM @Inject constructor(var tafsyrUseCase: TafsyrUseCase) : ViewMo
     private val _tafsyrSady: MutableStateFlow<List<AyaDataModel>> = MutableStateFlow(emptyList())
     val tafsyrQuranSady: StateFlow<List<AyaDataModel>> = _tafsyrSady
 
-    suspend fun getTafsyrQuranKatheer(suraNum: Int) {
+    fun setTafsyrType(flag: Int, sura: Int) {
+        when (flag) {
+            0 -> getTafsyrQuranKatheer(sura)
+            1 -> getTafsyrQuranBaghawy(sura)
+            2 -> getTafsyrQuranTbry(sura)
+            3 -> getTafsyrQuranSady(sura)
+        }
+    }
+
+    fun getTafsyrQuranKatheer(suraNum: Int) {
         viewModelScope.launch {
             _tafsyrKatheer.value = tafsyrUseCase.getTafsyrUseCase("tafsir-katheer", suraNum)
 
         }
     }
 
-    suspend fun getTafsyrQuranBaghawy(suraNum: Int) {
+    fun getTafsyrQuranBaghawy(suraNum: Int) {
         viewModelScope.launch {
             _tafsyrBaghawy.value = tafsyrUseCase.getTafsyrUseCase("tafsir-baghawy", suraNum)
 
@@ -37,14 +47,14 @@ class TafsyrViewM @Inject constructor(var tafsyrUseCase: TafsyrUseCase) : ViewMo
 
     }
 
-    suspend fun getTafsyrQuranTbry(suraNum: Int) {
+    fun getTafsyrQuranTbry(suraNum: Int) {
         viewModelScope.launch {
             _tafsyrTbry.value = tafsyrUseCase.getTafsyrUseCase("tafsir-tabary", suraNum)
 
         }
     }
 
-    suspend fun getTafsyrQuranSady(suraNum: Int) {
+    fun getTafsyrQuranSady(suraNum: Int) {
         viewModelScope.launch {
             _tafsyrSady.value = tafsyrUseCase.getTafsyrUseCase("tafsir-saadi", suraNum)
 

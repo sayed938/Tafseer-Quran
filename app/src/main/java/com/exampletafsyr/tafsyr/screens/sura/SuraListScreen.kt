@@ -74,6 +74,8 @@ fun SuraListScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 items(Utils.surahNames.size) {
+                    Log.d("sayed-sura : ",Utils.surahNumbers[it].toString())
+
                     SuraNames(Utils.surahNames[it], Utils.surahNumbers[it], navController, sharedVM)
                 }
 
@@ -115,6 +117,7 @@ fun SuraNames(
             .height(60.dp)
             .padding(2.dp)
             .clickable {
+
                 sharedViewM.saveTSuraNum(suraNum)
                 navController.navigate("ayaListScreen")
             },

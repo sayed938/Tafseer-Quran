@@ -1,5 +1,6 @@
 package com.exampletafsyr.tafsyr.screens.tafsyr
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -35,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.exampletafsyr.core.Utils
 import com.exampletafsyr.tafsyr.PassArgsSharedViewM
 import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.ui.theme.BackGColor1
@@ -48,11 +51,15 @@ fun TafsyrScreen(
     navController: NavController,
     sharedVM: PassArgsSharedViewM
 ) {
+    Log.d(
+        "sayed-tafsyr-screen",
+        sharedVM.ayaNum.value.toString() + " sura " + sharedVM.suraResult.value.size
+    )
     val pagerState = rememberPagerState(pageCount = {
-        10
-    })
+        sharedVM.suraResult.value.size
+    }, initialPage = sharedVM.ayaNum.value!! - 1)
     val scrollState = rememberScrollState()
-    val soura: String = "البقرة"
+    val soura: String = Utils.surahNames[sharedVM.suraNumber.value!! - 1]
 
     HorizontalPager(
         state = pagerState, modifier = Modifier
@@ -74,7 +81,13 @@ fun TafsyrScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Ibn Katheer",
+                        text = when (sharedVM.tafsyrType.value) {
+                            0 -> "Ibn Katheer"
+                            1 -> "Al-Baghawy"
+                            2 -> "Al-Tabry"
+                            3 -> "Al-Saady"
+                            else -> ""
+                        },
                         fontSize = 15.sp,
                         color = TextColor,
                         fontWeight = FontWeight.ExtraBold,
@@ -83,7 +96,13 @@ fun TafsyrScreen(
 
                     )
                     Text(
-                        text = "ابن كثير",
+                        text = when (sharedVM.tafsyrType.value) {
+                            0 -> "ابن كثير"
+                            1 -> "البغوي"
+                            2 -> "الطبري"
+                            3 -> "السعدي"
+                            else -> ""
+                        },
                         fontSize = 15.sp,
                         color = TextColor,
                         fontWeight = FontWeight.ExtraBold,
@@ -93,9 +112,13 @@ fun TafsyrScreen(
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = soura, fontSize = 14.sp,
-                    color = TextColor, modifier = Modifier.size(width = 30.dp, height = 34.dp),
-                    fontWeight = FontWeight.Bold, fontFamily = FontFamily(Font(R.font.amiriquran))
+                    text = soura,
+                    fontSize = 14.sp,
+                    color = TextColor,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily(Font(R.font.amiriquran))
 
                 )
                 Spacer(modifier = Modifier.height(10.dp))
@@ -116,7 +139,7 @@ fun TafsyrScreen(
 
 
                     Text(
-                        text = "102",
+                        text = "${page + 1}",
                         color = Color.White,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
@@ -127,29 +150,39 @@ fun TafsyrScreen(
 
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "وَٱتَّبَعُواْ مَا تَتۡلُواْ ٱلشَّيَٰطِينُ عَلَىٰ مُلۡكِ سُلَيۡمَٰنَۖ وَمَا كَفَرَ سُلَيۡمَٰنُ وَلَٰكِنَّ ٱلشَّيَٰطِينَ كَفَرُواْ يُعَلِّمُونَ ٱلنَّاسَ ٱلسِّحۡرَ وَمَآ أُنزِلَ عَلَى ٱلۡمَلَكَيۡنِ بِبَابِلَ هَٰرُوتَ وَمَٰرُوتَۚ وَمَا يُعَلِّمَانِ مِنۡ أَحَدٍ حَتَّىٰ يَقُولَآ إِنَّمَا نَحۡنُ فِتۡنَةٞ فَلَا تَكۡفُرۡۖ فَيَتَعَلَّمُونَ مِنۡهُمَا مَا يُفَرِّقُونَ بِهِۦ بَيۡنَ ٱلۡمَرۡءِ وَزَوۡجِهِۦۚ وَمَا هُم بِضَآرِّينَ بِهِۦ مِنۡ أَحَدٍ إِلَّا بِإِذۡنِ ٱللَّهِۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمۡ وَلَا يَنفَعُهُمۡۚ وَلَقَدۡ عَلِمُواْ لَمَنِ ٱشۡتَرَىٰهُ مَا لَهُۥ فِي ٱلۡأٓخِرَةِ مِنۡ خَلَٰقٖۚ وَلَبِئۡسَ مَا شَرَوۡاْ بِهِۦٓ أَنفُسَهُمۡۚ لَوۡ كَانُواْ يَعۡلَمُونََ",
-                    fontSize = 13.sp,
+                    text = "${sharedVM.suraResult.value[page].aya_text}", fontSize = 13.sp,
                     color = TextColor,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily(Font(R.font.amiriquran)),
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
-                        contentDescription = "next",
-                        modifier = Modifier.size(height = 30.dp, width = 25.dp)
-                    )
-                    if (pagerState.currentPage != 0) {
-                        Icon(
-                            painter = painterResource(R.drawable.baseline_arrow_forward_ios_24),
-                            contentDescription = "back",
-                            modifier = Modifier.size(height = 30.dp, width = 25.dp)
-                        )
+                Box {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        if (pagerState.currentPage != sharedVM.suraResult.value.size - 1) {
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "next", tint = Color.Black,
+                                modifier = Modifier.size(height = 30.dp, width = 25.dp)
+                            )
+                        }
+                        if (pagerState.currentPage == sharedVM.suraResult.value.size - 1) {
+                            Text(text = "")
+                        }
+                        if (pagerState.currentPage != 0) {
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "back", tint = Color.Black,
+                                modifier = Modifier
+                                    .size(height = 30.dp, width = 25.dp)
+                                    .graphicsLayer {
+                                        scaleX = -1f // يعكس الاتجاه أفقيًا
+                                    }
+                            )
+                        }
                     }
                 }
                 Text(
@@ -162,8 +195,7 @@ fun TafsyrScreen(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "ولما تركوا دين الله اتبعوا بدلًا عنه ما تَتَقَوَّلُهُ الشياطين كذبًا على مُلك نبي الله سليمان عليه السلام، حيث زعمت أنه ثَبّت ملكه بالسحر، وما كفر سليمان بتعاطي السحر - كما زعمت اليهود - ولكن الشياطين كفروا حيث كانوا يعلِّمون الناس السحر، ويعلمونهم السحر الذي أُنزل على الملَكين: هاروت وماروت، بمدينة بابل بالعراق، امتحانًا وابتلاء للناس، وما كان هذان الملكان يُعَلِّمان أيّ أحد السحر حتى يحذّراه ويبيِّنا له بقولهما: إنما نحن ابتلاء وامتحان للناس فلا تكفر بتعلمك السحر، فمن لم يقبل نصحهما تعلَّم منهما السحر، ومنه نوع يفرق بين الرجل وزوجته، بزرع البغضاء بينهما، وما يضر أولئك السحرة أيَّ أحد إلا بإذن الله ومشيئته، ويتعلمون ما يضرهم ولا ينفعهم، ولقد علم أولئك اليهود أن من استبدل السحر بكتاب الله ما له في الآخرة من حظ ولا نصيب، ولبئس ما باعوا به أنفسهم حيث استبدلوا السحر بوحي الله وشرعه، ولو كانوا يعلمون ما ينفعهم ما أقدموا على هذا العمل المَشِين والضلال المبين",
-                    fontSize = 13.sp,
+                    text = "${sharedVM.suraResult.value[page].content}", fontSize = 13.sp,
                     color = TextColor,
                     fontWeight = FontWeight.ExtraBold,
                     fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
@@ -173,7 +205,7 @@ fun TafsyrScreen(
                 Box(
                     modifier = Modifier
                         .clickable {
-                            navController.popBackStack()
+                            navController.popBackStack(route = "ayaListScreen", false)
                         }
                         .size(width = 180.dp, height = 40.dp)
                         .background(

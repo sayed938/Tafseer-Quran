@@ -54,7 +54,6 @@ import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.TafsyrViewM
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
-import kotlinx.coroutines.flow.StateFlow
 
 @SuppressLint("MutableCollectionMutableState")
 @Composable
@@ -64,16 +63,12 @@ fun AyahListScreen(
     tafsyrVM: TafsyrViewM = hiltViewModel()
 ) {
 
-    tafsyrVM.setTafsyrType(sharedVM.tafsyrType.value!!, sharedVM.suraName.value!!)
+    tafsyrVM.setTafsyrType(sharedVM.tafsyrType.value!!, sharedVM.suraNumber.value!!)
 
     val katheer by tafsyrVM.tafsyrQuranKatheer.collectAsState()
     val baghawy by tafsyrVM.tafsyrQuranBaghawy.collectAsState()
     val tbry by tafsyrVM.tafsyrQuranTbry.collectAsState()
     val sady by tafsyrVM.tafsyrQuranSady.collectAsState()
-    Log.d(
-        "sayed-res-name",
-        sharedVM.tafsyrType.value.toString() + " "
-    )
     val resultTafsyr = when (sharedVM.tafsyrType.value) {
         0 -> katheer
         1 -> baghawy
@@ -83,7 +78,7 @@ fun AyahListScreen(
     }
     Log.d(
         "sayed-res-name",
-        sharedVM.suraName.value.toString() + " " + resultTafsyr.size
+        sharedVM.suraNumber.value.toString() + " " + resultTafsyr.size
     )
     var input by remember { mutableStateOf("") }
     var hintText by remember { mutableStateOf("ادخل") }
@@ -117,7 +112,7 @@ fun AyahListScreen(
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text(
-                text = " سورة : ${Utils.surahNames[sharedVM.suraName.value!! - 1]}",
+                text = " سورة : ${Utils.surahNames[sharedVM.suraNumber.value!! - 1]}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 19.sp, color = Color(0xFFC4A94B),
                 fontFamily = FontFamily(Font(R.font.amiriquran))
@@ -125,7 +120,7 @@ fun AyahListScreen(
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text(
-                text = " رقم السورة : ${sharedVM.suraName.value!!}",
+                text = " رقم السورة : ${sharedVM.suraNumber.value!!}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 19.sp, color = Color(0xFFC4A94B),
                 fontFamily = FontFamily(Font(R.font.amiriquran))
@@ -182,10 +177,10 @@ fun AyahListScreen(
                 hintText = "ادخل"
                 items(resultTafsyr.size) {
                     AyahCustom(
-                        resultTafsyr.get(it).aya_text!!,
-                        resultTafsyr.size,
+                        resultTafsyr[it].aya_text!!,
+                        resultTafsyr[it].aya_number!!,
                         sharedVM,
-                        navController
+                        navController, resultTafsyr
                     )
                 }
             } else {
@@ -197,7 +192,7 @@ fun AyahListScreen(
                             hintText = ""
                             ayaResult = resultTafsyr[input.toInt() - 1].aya_text!!
                             numResult = input.toInt()
-                            AyahCustom(ayaResult, numResult, sharedVM, navController)
+                            AyahCustom(ayaResult, numResult, sharedVM, navController, resultTafsyr)
                         } else
                             hintText = "خطأ"
                     }
@@ -212,7 +207,7 @@ fun AyahCustom(
     aya: String,
     ayaNum: Int,
     sharedViewM: PassArgsSharedViewM,
-    navController: NavController
+    navController: NavController, sura: List<AyaDataModel>
 ) {
     Card(
         modifier = Modifier
@@ -220,7 +215,8 @@ fun AyahCustom(
             .height(60.dp)
             .padding(top = 2.dp, bottom = 2.dp, start = 5.dp, end = 5.dp)
             .clickable {
-                sharedViewM.saveTSuraNum(ayaNum)
+                sharedViewM.saveAyaNum(ayaNum)
+                sharedViewM.saveSuraResult(sura)
                 navController.navigate("tafsyrScreen")
             },
         elevation = CardDefaults.cardElevation(4.dp),

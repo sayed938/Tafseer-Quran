@@ -13,10 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -47,10 +43,13 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Card(modifier = Modifier.clickable(){
-                    sharedViewModel.saveTafsyrType(0)
-                    navController.navigate("suraListScreen")
-                }) {
+                Card(
+                    modifier = Modifier
+                        .clickable {
+                            sharedViewModel.saveTafsyrType(0)
+
+                            navController.navigate("suraListScreen")
+                        }) {
                     Box(
                         modifier = Modifier
                             .background(
@@ -65,7 +64,9 @@ fun HomeScreen(
                         }
                     }
                 }
-                Card(modifier = Modifier.clickable(){
+
+                Card(modifier = Modifier.clickable() {
+
                     sharedViewModel.saveTafsyrType(1)
                     navController.navigate("suraListScreen")
                 }) {
@@ -89,7 +90,7 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Card(modifier = Modifier.clickable(){
+                Card(modifier = Modifier.clickable() {
                     sharedViewModel.saveTafsyrType(2)
                     navController.navigate("suraListScreen")
                 }) {
@@ -107,10 +108,10 @@ fun HomeScreen(
                         }
                     }
                 }
-                Card (modifier = Modifier.clickable(){
+                Card(modifier = Modifier.clickable() {
                     sharedViewModel.saveTafsyrType(3)
                     navController.navigate("suraListScreen")
-                }){
+                }) {
                     Box(
                         modifier = Modifier
                             .background(

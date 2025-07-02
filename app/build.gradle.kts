@@ -73,4 +73,11 @@ dependencies {
     kapt(libs.androidx.hilt.compiler)
     kapt(libs.androidx.hilt.compiler)
     implementation(libs.androidx.preference.ktx)
+
+
+    //animation
+    implementation ("com.google.accompanist:accompanist-navigation-animation:0.34.0")
+
+    implementation ("com.valentinilk.shimmer:compose-shimmer:1.0.5")
+
 }

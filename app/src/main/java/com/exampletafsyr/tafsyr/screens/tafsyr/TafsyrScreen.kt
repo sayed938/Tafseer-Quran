@@ -69,164 +69,164 @@ fun TafsyrScreen(
                     (colors = listOf(BackGColor1, BackGColor2))
             ), reverseLayout = true
     ) { page ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(scrollState)
-                    .padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                Text(
+                    text = when (sharedVM.tafsyrType.value) {
+                        0 -> "Ibn Katheer"
+                        1 -> "Al-Baghawy"
+                        2 -> "Al-Tabry"
+                        3 -> "Al-Saady"
+                        else -> ""
+                    },
+                    fontSize = 15.sp,
+                    color = TextColor,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontFamily = FontFamily(Font(R.font.amiriquran))
+
+
+                )
+                Text(
+                    text = when (sharedVM.tafsyrType.value) {
+                        0 -> "ابن كثير"
+                        1 -> "البغوي"
+                        2 -> "الطبري"
+                        3 -> "السعدي"
+                        else -> ""
+                    },
+                    fontSize = 15.sp,
+                    color = TextColor,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontFamily = FontFamily(Font(R.font.amiriquran))
+
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = soura,
+                fontSize = 14.sp,
+                color = TextColor,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily(Font(R.font.amiriquran))
+
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+
+
+
+
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(height = 32.dp, width = 40.dp)
+                    .clip(CircleShape)
+                    .background(
+                        brush = Brush.linearGradient
+                            (colors = listOf(CardMainColor1, CardMainColor2))
+                    )
+            ) {
+
+
+                Text(
+                    text = "${page + 1}",
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+            }
+
+
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "${sharedVM.suraResult.value[page].aya_text}", fontSize = 13.sp,
+                color = TextColor,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily(Font(R.font.amiriquran)),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Box {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = when (sharedVM.tafsyrType.value) {
-                            0 -> "Ibn Katheer"
-                            1 -> "Al-Baghawy"
-                            2 -> "Al-Tabry"
-                            3 -> "Al-Saady"
-                            else -> ""
-                        },
-                        fontSize = 15.sp,
-                        color = TextColor,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontFamily = FontFamily(Font(R.font.amiriquran))
-
-
-                    )
-                    Text(
-                        text = when (sharedVM.tafsyrType.value) {
-                            0 -> "ابن كثير"
-                            1 -> "البغوي"
-                            2 -> "الطبري"
-                            3 -> "السعدي"
-                            else -> ""
-                        },
-                        fontSize = 15.sp,
-                        color = TextColor,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontFamily = FontFamily(Font(R.font.amiriquran))
-
-                    )
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = soura,
-                    fontSize = 14.sp,
-                    color = TextColor,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily(Font(R.font.amiriquran))
-
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-
-
-
-
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(height = 32.dp, width = 40.dp)
-                        .clip(CircleShape)
-                        .background(
-                            brush = Brush.linearGradient
-                                (colors = listOf(CardMainColor1, CardMainColor2))
+                    if (pagerState.currentPage != sharedVM.suraResult.value.size - 1) {
+                        Icon(
+                            painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
+                            contentDescription = "next", tint = Color.Black,
+                            modifier = Modifier.size(height = 30.dp, width = 25.dp)
                         )
-                ) {
-
-
-                    Text(
-                        text = "${page + 1}",
-                        color = Color.White,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                }
-
-
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = "${sharedVM.suraResult.value[page].aya_text}", fontSize = 13.sp,
-                    color = TextColor,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily(Font(R.font.amiriquran)),
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-                Box {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        if (pagerState.currentPage != sharedVM.suraResult.value.size - 1) {
-                            Icon(
-                                painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
-                                contentDescription = "next", tint = Color.Black,
-                                modifier = Modifier.size(height = 30.dp, width = 25.dp)
-                            )
-                        }
-                        if (pagerState.currentPage == sharedVM.suraResult.value.size - 1) {
-                            Text(text = "")
-                        }
-                        if (pagerState.currentPage != 0) {
-                            Icon(
-                                painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
-                                contentDescription = "back", tint = Color.Black,
-                                modifier = Modifier
-                                    .size(height = 30.dp, width = 25.dp)
-                                    .graphicsLayer {
-                                        scaleX = -1f // يعكس الاتجاه أفقيًا
-                                    }
-                            )
-                        }
+                    }
+                    if (pagerState.currentPage == sharedVM.suraResult.value.size - 1) {
+                        Text(text = "")
+                    }
+                    if (pagerState.currentPage != 0) {
+                        Icon(
+                            painter = painterResource(R.drawable.baseline_arrow_back_ios_new_24),
+                            contentDescription = "back", tint = Color.Black,
+                            modifier = Modifier
+                                .size(height = 30.dp, width = 25.dp)
+                                .graphicsLayer {
+                                    scaleX = -1f
+                                }
+                        )
                     }
                 }
-                Text(
-                    text = ": التفسير", fontSize = 16.sp,
-                    color = TextColor, modifier = Modifier.fillMaxWidth(),
-                    fontWeight = FontWeight.ExtraBold,
-                    fontFamily = FontFamily(Font(R.font.amiriquran)),
-                    textAlign = TextAlign.Right
-                )
-                Spacer(modifier = Modifier.height(10.dp))
+            }
+            Text(
+                text = ": التفسير", fontSize = 16.sp,
+                color = TextColor, modifier = Modifier.fillMaxWidth(),
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily(Font(R.font.amiriquran)),
+                textAlign = TextAlign.Right
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "${sharedVM.suraResult.value[page].content}", fontSize = 13.sp,
+                color = TextColor,
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Box(
+                modifier = Modifier
+                    .clickable {
+                        sharedVM.setAnimationFlag(1)
+                        navController.popBackStack(route = "ayaListScreen", false)
+                    }
+                    .size(width = 180.dp, height = 40.dp)
+                    .background(
+                        brush = Brush.linearGradient
+                            (colors = listOf(CardMainColor1, CardMainColor2)),
+                        shape = RoundedCornerShape(12.dp)
+                    ), contentAlignment = Alignment.Center
+            ) {
 
                 Text(
-                    text = "${sharedVM.suraResult.value[page].content}", fontSize = 13.sp,
-                    color = TextColor,
-                    fontWeight = FontWeight.ExtraBold,
+                    "خروج",
+                    fontSize = 19.sp,
                     fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
-                    textAlign = TextAlign.Center
+                    color = Color.White
                 )
-                Spacer(modifier = Modifier.height(10.dp))
-                Box(
-                    modifier = Modifier
-                        .clickable {
-                            navController.popBackStack(route = "ayaListScreen", false)
-                        }
-                        .size(width = 180.dp, height = 40.dp)
-                        .background(
-                            brush = Brush.linearGradient
-                                (colors = listOf(CardMainColor1, CardMainColor2)),
-                            shape = RoundedCornerShape(12.dp)
-                        ), contentAlignment = Alignment.Center
-                ) {
 
-                    Text(
-                        "خروج",
-                        fontSize = 19.sp,
-                        fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
-                        color = Color.White
-                    )
-
-
-                }
 
             }
+
         }
+
     }
 
 }

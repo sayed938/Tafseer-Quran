@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -54,6 +55,9 @@ import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.TafsyrViewM
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
+import com.valentinilk.shimmer.ShimmerBounds
+import com.valentinilk.shimmer.rememberShimmer
+import com.valentinilk.shimmer.shimmer
 
 @SuppressLint("MutableCollectionMutableState")
 @Composable
@@ -86,6 +90,9 @@ fun AyahListScreen(
     var ayaNumbers by remember { mutableStateOf(Utils.numbers) }
     var ayaResult by remember { mutableStateOf("") }
     var numResult by remember { mutableStateOf(0) }
+    val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.View)
+
+
 
 
     Column(
@@ -171,35 +178,57 @@ fun AyahListScreen(
             )
         )
         Spacer(modifier = Modifier.height(10.dp))
-
-        LazyVerticalGrid(columns = GridCells.Fixed(count = 1)) {
-            if (input == "") {
-                hintText = "ادخل"
-                items(resultTafsyr.size) {
-                    AyahCustom(
-                        resultTafsyr[it].aya_text!!,
-                        resultTafsyr[it].aya_number!!,
-                        sharedVM,
-                        navController, resultTafsyr
+        if (resultTafsyr.size == 0) {
+            LazyVerticalGrid(columns = GridCells.Fixed(1)) {
+                items(10) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .padding(horizontal = 10.dp, vertical = 4.dp)
+                            .clip(CircleShape)
+                            .shimmer(shimmerInstance)
+                            .background(Color.LightGray)
                     )
                 }
-            } else {
-                if (input.toInt() > resultTafsyr.size) {
-                    hintText = "خطأ"
-                } else
-                    items(1) {
-                        if (input.toInt() > 0 && input.toInt() <= resultTafsyr.size) {
-                            hintText = ""
-                            ayaResult = resultTafsyr[input.toInt() - 1].aya_text!!
-                            numResult = input.toInt()
-                            AyahCustom(ayaResult, numResult, sharedVM, navController, resultTafsyr)
-                        } else
-                            hintText = "خطأ"
-                    }
             }
+        } else {
+            LazyVerticalGrid(columns = GridCells.Fixed(count = 1)) {
+                if (input == "") {
+                    hintText = "ادخل"
+                    items(resultTafsyr.size) {
+                        AyahCustom(
+                            resultTafsyr[it].aya_text!!,
+                            resultTafsyr[it].aya_number!!,
+                            sharedVM,
+                            navController, resultTafsyr
+                        )
+                    }
+                } else {
+                    if (input.toInt() > resultTafsyr.size) {
+                        hintText = "خطأ"
+                    } else
+                        items(1) {
+                            if (input.toInt() > 0 && input.toInt() <= resultTafsyr.size) {
+                                hintText = ""
+                                ayaResult = resultTafsyr[input.toInt() - 1].aya_text!!
+                                numResult = input.toInt()
+                                AyahCustom(
+                                    ayaResult,
+                                    numResult,
+                                    sharedVM,
+                                    navController,
+                                    resultTafsyr
+                                )
+                            } else
+                                hintText = "خطأ"
+                        }
+                }
 
+            }
         }
     }
+
 }
 
 @Composable
@@ -209,6 +238,7 @@ fun AyahCustom(
     sharedViewM: PassArgsSharedViewM,
     navController: NavController, sura: List<AyaDataModel>
 ) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth()

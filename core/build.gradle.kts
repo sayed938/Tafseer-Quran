@@ -1,6 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+
+    id("kotlin-kapt")
+    id("kotlin-android")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -33,11 +38,33 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(Deps.AndroidX.coreKtx)
+    implementation(Deps.AndroidX.appcompat)
+    implementation(Deps.Material.material)
+
+    testImplementation(Deps.Test.junit)
+    androidTestImplementation(Deps.Test.androidxJunit)
+    androidTestImplementation(Deps.Test.espresso)
+
+    implementation(Deps.AndroidX.lifecycleRuntimeKtx)
+    implementation(Deps.AndroidX.activityCompose)
+    implementation(platform(Deps.Compose.bom))
+    implementation(Deps.Compose.ui)
+    implementation(Deps.Compose.graphics)
+    implementation(Deps.Compose.toolingPreview)
+    implementation(Deps.Compose.material3)
+    androidTestImplementation(platform(Deps.Compose.bom))
+    androidTestImplementation(Deps.Compose.uiTestJunit4)
+    debugImplementation(Deps.Compose.tooling)
+    debugImplementation(Deps.Compose.uiTestManifest)
+
+    implementation(Deps.AndroidX.lifecycleViewModelKtx)
+    implementation(Deps.Hilt.hiltNavigationCompose)
+
+    implementation(Deps.Hilt.hiltAndroid)
+    kapt(Deps.Hilt.hiltCompiler)
+    kapt(Deps.Hilt.androidxHiltCompiler)
+    implementation(Deps.AndroidX.preferenceKtx)
 }

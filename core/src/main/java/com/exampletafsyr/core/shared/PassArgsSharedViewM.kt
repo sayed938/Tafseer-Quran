@@ -1,11 +1,11 @@
-package com.exampletafsyr.tafsyr
+package com.exampletafsyr.core.shared
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.exampletafsyr.domain.entities.AyaDataModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import androidx.compose.runtime.State
+import com.exampletafsyr.domain.entities.AyaDataModel
 
 @HiltViewModel
 class PassArgsSharedViewM @Inject constructor() : ViewModel() {

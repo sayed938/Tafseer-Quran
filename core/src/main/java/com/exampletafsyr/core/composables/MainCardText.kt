@@ -1,4 +1,4 @@
-package com.exampletafsyr.tafsyr.composables
+package com.exampletafsyr.core.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -10,7 +10,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MainCardText(text: String){
-    Text(text = text, color = Color.White, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+fun MainCardText(text: String) {
+    Text(
+        text = text,
+        color = Color.White,
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp
+    )
 
 }

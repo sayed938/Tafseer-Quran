@@ -1,4 +1,4 @@
-package com.exampletafsyr.tafsyr.screens.home
+package com.exampletafsyr.feature.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,11 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.exampletafsyr.tafsyr.PassArgsSharedViewM
-import com.exampletafsyr.tafsyr.composables.Header
-import com.exampletafsyr.tafsyr.composables.MainCardText
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
+import com.exampletafsyr.core.shared.PassArgsSharedViewM
+import com.exampletafsyr.core.composables.Header
+import com.exampletafsyr.core.composables.MainCardText
+import com.exampletafsyr.core.colors.CardMainColor1
+import com.exampletafsyr.core.colors.CardMainColor2
 
 @Composable
 fun HomeScreen(

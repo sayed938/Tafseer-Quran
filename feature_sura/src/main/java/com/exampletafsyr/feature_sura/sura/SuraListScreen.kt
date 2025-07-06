@@ -1,4 +1,4 @@
-package com.exampletafsyr.tafsyr.screens.sura
+package com.exampletafsyr.feature_sura.sura
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -34,9 +34,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.exampletafsyr.core.Utils
 import com.exampletafsyr.core.shared.PassArgsSharedViewM
-import com.exampletafsyr.tafsyr.R
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
+import com.exampletafsyr.core.R
+import com.exampletafsyr.core.colors.CardMainColor1
+import com.exampletafsyr.core.colors.CardMainColor3
 
 @Composable
 fun SuraListScreen(

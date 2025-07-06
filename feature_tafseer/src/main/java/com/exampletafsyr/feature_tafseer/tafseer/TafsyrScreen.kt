@@ -1,4 +1,4 @@
-package com.exampletafsyr.tafsyr.screens.tafsyr
+package com.exampletafsyr.feature_tafseer.tafseer
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -39,12 +39,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.exampletafsyr.core.Utils
 import com.exampletafsyr.core.shared.PassArgsSharedViewM
-import com.exampletafsyr.tafsyr.R
-import com.exampletafsyr.tafsyr.ui.theme.BackGColor1
-import com.exampletafsyr.tafsyr.ui.theme.BackGColor2
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
-import com.exampletafsyr.tafsyr.ui.theme.TextColor
+import com.exampletafsyr.core.colors.BackGColor1
+import com.exampletafsyr.core.colors.BackGColor2
+import com.exampletafsyr.core.colors.CardMainColor1
+import com.exampletafsyr.core.colors.CardMainColor2
+import com.exampletafsyr.core.colors.TextColor
+import com.exampletafsyr.core.R
 
 @Composable
 fun TafsyrScreen(

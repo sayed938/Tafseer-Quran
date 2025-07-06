@@ -33,10 +33,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.exampletafsyr.core.Utils
-import com.exampletafsyr.tafsyr.PassArgsSharedViewM
+import com.exampletafsyr.core.shared.PassArgsSharedViewM
 import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
 
 @Composable

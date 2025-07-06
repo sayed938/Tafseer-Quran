@@ -6,14 +6,12 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
+import com.exampletafsyr.core.shared.PassArgsSharedViewM
+import com.exampletafsyr.feature.navigation.homeRoute
 import com.exampletafsyr.tafsyr.routes.ayaRoute
-import com.exampletafsyr.tafsyr.routes.homeRoute
 import com.exampletafsyr.tafsyr.routes.splashRoute
 import com.exampletafsyr.tafsyr.routes.suraRoute
 import com.exampletafsyr.tafsyr.routes.tafsyrRoute

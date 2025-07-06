@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -50,7 +49,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.exampletafsyr.core.Utils
 import com.exampletafsyr.domain.entities.AyaDataModel
-import com.exampletafsyr.tafsyr.PassArgsSharedViewM
+import com.exampletafsyr.core.shared.PassArgsSharedViewM
 import com.exampletafsyr.tafsyr.R
 import com.exampletafsyr.tafsyr.TafsyrViewM
 import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1

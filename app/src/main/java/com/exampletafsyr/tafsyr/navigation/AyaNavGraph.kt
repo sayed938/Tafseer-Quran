@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.exampletafsyr.tafsyr
+package com.exampletafsyr.tafsyr.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.exampletafsyr.core.shared.PassArgsSharedViewM
-import com.exampletafsyr.feature.navigation.homeRoute
+import com.exampletafsyr.feature.route.homeRoute
 import com.exampletafsyr.feature_ayah.route.ayaRoute
-import com.exampletafsyr.tafsyr.routes.splashRoute
-import com.exampletafsyr.tafsyr.routes.suraRoute
-import com.exampletafsyr.tafsyr.routes.tafsyrRoute
+import com.exampletafsyr.feature_sura.route.suraRoute
+import com.exampletafsyr.feature_tafseer.route.tafsyrRoute
+import com.exampletafsyr.feature.route.splashRoute
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 
 @OptIn(ExperimentalAnimationApi::class)

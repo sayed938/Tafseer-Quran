@@ -1,4 +1,4 @@
-package com.exampletafsyr.feature.navigation
+package com.exampletafsyr.feature.route
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

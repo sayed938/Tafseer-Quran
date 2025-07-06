@@ -1,4 +1,4 @@
-package com.exampletafsyr.tafsyr.screens
+package com.exampletafsyr.feature.splash
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.EaseOutBounce
@@ -18,10 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.exampletafsyr.core.R
 import androidx.navigation.NavController
-import com.exampletafsyr.tafsyr.R
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor2
+import com.exampletafsyr.core.colors.CardMainColor1
+import com.exampletafsyr.core.colors.CardMainColor2
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

@@ -11,7 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.exampletafsyr.core.shared.PassArgsSharedViewM
 import com.exampletafsyr.feature.navigation.homeRoute
-import com.exampletafsyr.tafsyr.routes.ayaRoute
+import com.exampletafsyr.feature_ayah.route.ayaRoute
 import com.exampletafsyr.tafsyr.routes.splashRoute
 import com.exampletafsyr.tafsyr.routes.suraRoute
 import com.exampletafsyr.tafsyr.routes.tafsyrRoute

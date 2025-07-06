@@ -1,7 +1,8 @@
-package com.exampletafsyr.tafsyr.screens.aya
+package com.exampletafsyr.feature_ayah.ayah
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -50,10 +51,10 @@ import androidx.navigation.NavController
 import com.exampletafsyr.core.Utils
 import com.exampletafsyr.domain.entities.AyaDataModel
 import com.exampletafsyr.core.shared.PassArgsSharedViewM
-import com.exampletafsyr.tafsyr.R
-import com.exampletafsyr.tafsyr.TafsyrViewM
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor1
-import com.exampletafsyr.tafsyr.ui.theme.CardMainColor3
+import com.exampletafsyr.core.R
+import com.exampletafsyr.core.colors.CardMainColor1
+import com.exampletafsyr.core.colors.CardMainColor3
+import com.exampletafsyr.feature_ayah.view_model.TafsyrViewM
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
@@ -249,7 +250,7 @@ fun AyahCustom(
                 navController.navigate("tafsyrScreen")
             },
         elevation = CardDefaults.cardElevation(4.dp),
-        border = _root_ide_package_.androidx.compose.foundation.BorderStroke(
+        border = BorderStroke(
             2.dp, brush = Brush.linearGradient
                 (colors = listOf(CardMainColor1, CardMainColor3))
         )

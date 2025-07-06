@@ -1,6 +1,5 @@
-package com.exampletafsyr.tafsyr
+package com.exampletafsyr.feature_ayah.view_model
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exampletafsyr.domain.entities.AyaDataModel

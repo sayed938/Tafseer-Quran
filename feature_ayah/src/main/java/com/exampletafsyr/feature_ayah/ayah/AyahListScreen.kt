@@ -54,7 +54,7 @@ import com.exampletafsyr.core.shared.PassArgsSharedViewM
 import com.exampletafsyr.core.R
 import com.exampletafsyr.core.colors.CardMainColor1
 import com.exampletafsyr.core.colors.CardMainColor3
-import com.exampletafsyr.feature_ayah.view_model.TafsyrViewM
+import com.exampletafsyr.feature_ayah.viewmodel.TafsyrViewM
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer

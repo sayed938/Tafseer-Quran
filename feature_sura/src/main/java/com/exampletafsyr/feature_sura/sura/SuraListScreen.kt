@@ -79,23 +79,6 @@ fun SuraListScreen(
                 }
 
             }
-            /* Box(
-                 modifier = Modifier
-                     .size(width = 180.dp, height = 40.dp)
-                     .background(
-                         brush = Brush.linearGradient
-                             (colors = listOf(AyaColor, CardMainColor2)),
-                         shape = RoundedCornerShape(12.dp)
-                     ), contentAlignment = Alignment.Center
-             ) {
-                 Text(
-                     "رجوع",
-                     fontSize = 19.sp,
-                     fontFamily = FontFamily(Font(R.font.notonaskharabic_variablefont_wght)),
-                     color = Color.White
-                 )
-
-             }*/
 
         }
     }

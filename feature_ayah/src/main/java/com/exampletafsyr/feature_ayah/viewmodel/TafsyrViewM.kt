@@ -1,4 +1,4 @@
-package com.exampletafsyr.feature_ayah.view_model
+package com.exampletafsyr.feature_ayah.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

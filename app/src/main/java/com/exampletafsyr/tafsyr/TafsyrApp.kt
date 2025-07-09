@@ -12,8 +12,7 @@ import com.exampletafsyr.tafsyr.ui.theme.TafsyrTheme
 fun TafsyrApp() {
     TafsyrTheme {
         Scaffold {
-            val navController = rememberNavController()
-            AyaNAvGraph(navController)
+            AyaNAvGraph(rememberNavController())
         }
     }
 }

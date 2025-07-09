@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature_ayah" />
             <option value="$PROJECT_DIR$/feature_home" />
+            <option value="$PROJECT_DIR$/feature_sura" />
             <option value="$PROJECT_DIR$/feature_tafseer" />
           </set>
         </option>
